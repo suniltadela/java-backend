@@ -1,6 +1,7 @@
 package vendorproject.javaproject.Service.Impls;
 
 import org.springframework.stereotype.Service;
+import vendorproject.javaproject.Exception.Cloudvendornotfoundexception;
 import vendorproject.javaproject.Repositary.CloudvendorReopsitory;
 import vendorproject.javaproject.Service.CloudvendorService;
 import vendorproject.javaproject.model.Cloudvendor;
@@ -26,6 +27,9 @@ public class Cloudvendorserviceimpls implements CloudvendorService {
 
     @Override
     public Cloudvendor getvendordetail(String vendorid) {
+        if(cloudvendorReopsitory.findById(vendorid).isEmpty()){
+            throw new  Cloudvendornotfoundexception("usernotfound");
+        }
         return cloudvendorReopsitory.findById(vendorid).get();
     }
 
